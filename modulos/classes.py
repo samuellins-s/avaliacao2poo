@@ -59,9 +59,9 @@ class Vacinacao(Atendimento):
 
 
 class Agenda:
-    def __init__(self) -> None:
+    def __init__(self, limite_minutos: int = 240) -> None:
+        self._limite_minutos: int = limite_minutos
         self.atendimentos: list[Atendimento] = []
-        self._limite_minutos: int = 240
         self.agendamentos: list[Atendimento] = []
 
     @property
