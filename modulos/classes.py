@@ -57,3 +57,11 @@ class Vacinacao(Atendimento):
         return self.doses * 10
 
 
+class Agenda:
+    def __init__(self):
+        self.ListAtendimento: list[Atendimento]
+        self._limite_minutos: int = 240
+
+    @property
+    def listaAtendimento(self) -> :
+
