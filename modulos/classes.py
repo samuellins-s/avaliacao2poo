@@ -1,4 +1,4 @@
-from erros import *
+from modulos.erros import *
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
@@ -62,6 +62,7 @@ class Agenda:
     def __init__(self) -> None:
         self.atendimentos: list[Atendimento] = []
         self._limite_minutos: int = 240
+        self.agendamentos: list[Atendimento] = []
 
     @property
     def listaAtendimento(self) -> None:
@@ -74,6 +75,8 @@ class Agenda:
 
     def agendar(self, atendimento: Atendimento):
         for index in range(len(self.atendimentos)):
-            for index2 in range( index + 1, len(self.atendimentos))
+            for index2 in range( index + 1, len(self.atendimentos)):
                 if index.paciente.nome and index.paciente.cartao_sus ==  index2.paciente.nome and index2.paciente.cartao_sus:
                     raise PacienteJaAgendadoError('O paciente já está agendado')
+                else:
+                    self.agendamentos.append(atendimento)
