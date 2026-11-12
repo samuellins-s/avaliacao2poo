@@ -1,3 +1,4 @@
+from erros import *
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
 
@@ -72,4 +73,7 @@ class Agenda:
         return sum(atendimento.duracao_minutos() for atendimento in self.atendimentos)
 
     def agendar(self, atendimento: Atendimento):
-        pass
+        for index in range(len(self.atendimentos)):
+            for index2 in range( index + 1, len(self.atendimentos))
+                if index.paciente.nome and index.paciente.cartao_sus ==  index2.paciente.nome and index2.paciente.cartao_sus:
+                    raise PacienteJaAgendadoError('O paciente já está agendado')
