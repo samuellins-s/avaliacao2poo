@@ -21,7 +21,7 @@ class Atendimento(ABC):
 
 
 class Consulta(Atendimento):
-    def __init__(self, paciente, especialidade: str, retorno: bool = False) -> None:
+    def __init__(self, paciente: Paciente, especialidade: str, retorno: bool = False) -> None:
         super().__init__(paciente)
         self.tipo_atendimento = 'Consulta'
         self.especialidade = especialidade
@@ -35,7 +35,7 @@ class Consulta(Atendimento):
 
 
 class Exame(Atendimento):
-    def __init__(self, paciente, tipo: str, jejum: bool = False) -> None:
+    def __init__(self, paciente: Paciente, tipo: str, jejum: bool = False) -> None:
         super().__init__(paciente)
         self.tipo = tipo
         self.jejum = jejum
@@ -48,7 +48,7 @@ class Exame(Atendimento):
 
 
 class Vacinacao(Atendimento):
-    def __init__(self, paciente, vacina: str, doses: int = 1) -> None:
+    def __init__(self, paciente: Paciente, vacina: str, doses: int = 1) -> None:
         super().__init__(paciente)
         self.vacina = vacina
         self.doses = doses
@@ -58,10 +58,18 @@ class Vacinacao(Atendimento):
 
 
 class Agenda:
-    def __init__(self):
-        self.ListAtendimento: list[Atendimento]
+    def __init__(self) -> None:
+        self.atendimentos: list[Atendimento] = []
         self._limite_minutos: int = 240
 
     @property
-    def listaAtendimento(self) -> :
+    def listaAtendimento(self) -> None:
+        for atendimento in self.atendimentos:
+            print(atendimento)
 
+    @property
+    def minutos_ocupados(self) -> int:
+        return sum(atendimento.duracao_minutos() for atendimento in self.atendimentos)
+
+    def agendar(self, atendimento: Atendimento):
+        pass
