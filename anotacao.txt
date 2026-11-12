@@ -1,0 +1,8 @@
+UPA
+gestão de atendimentos diarios
+
+AGENDA -> limite de minutos por dia, não pode ter 2 atendimentos para o mesmo paciente:
+
+1 atendimento -> 1 paciente -> 1 consulta ou 1 exame ou 1 vacinacao
+    Cada um com o seu tempo diferente
+
