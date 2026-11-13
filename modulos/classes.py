@@ -65,22 +65,25 @@ class Vacinacao(Atendimento):
 class Agenda:
     def __init__(self, limite_minutos: int = 240) -> None:
         self._limite_minutos: int = limite_minutos
-        self.atendimentos: list[Atendimento] = []
-        self.agendamentos: list[Atendimento] = []
-
-    @property
-    def listaAtendimento(self) -> None:
-        for atendimento in self.atendimentos:
-            print(atendimento)
-
+        self._atendimentos: list[Atendimento] = []
+        
     @property
     def minutos_ocupados(self) -> int:
-        return sum(atendimento.duracao_minutos() for atendimento in self.atendimentos)
+        return sum(atendimento.duracao_minutos() for atendimento in self._atendimentos)
 
+    @property
+    def atendimentos(self) -> tuple[Atendimento]:
+        return tuple(self._atendimentos)
+    
     def agendar(self, atendimento: Atendimento):
-        for index in range(len(self.atendimentos)):
-            for index2 in range( index + 1, len(self.atendimentos)):
-                if index.paciente.nome and index.paciente.cartao_sus ==  index2.paciente.nome and index2.paciente.cartao_sus:
-                    raise PacienteJaAgendadoError('O paciente já está agendado')
-                else:
-                    self.agendamentos.append(atendimento)
+        for intem in self._atendimentos:
+            if intem.paciente == atendimento.paciente:
+                raise PacienteJaAgendadoError(f"O paciente {atendimento.paciente.nome} já está agendado")
+        
+        duracao = atendimento.duracao_minutos()
+        minutos_restantes = self._limite_minutos - self.minutos_ocupados
+        
+        if duracao > minutos_restantes:
+            raise HorarioIndisponivelError("Horário indisponível: agenda cheia.")
+        
+        self._atendimentos.append(atendimento)
