@@ -10,9 +10,13 @@ class Paciente:
 
 class Atendimento(ABC):
     def __init__(self, paciente: Paciente) -> None:
-        self.paciente = paciente
+        self._paciente = paciente
         self.tipo_atendimento = ''
 
+    @property
+    def paciente(self) -> Paciente:
+        return self._paciente
+    
     @abstractmethod
     def duracao_minutos(self) -> int:
         pass
