@@ -15,7 +15,7 @@ def secao(titulo: str) -> None:
 
 
 def verificar(descricao: str, condicao: bool) -> None:
-    # assert condicao, f"FALHOU: {descricao}"
+    #assert condicao, f"FALHOU: {descricao}"
     print(f"  OK  {descricao}")
 
 
@@ -25,7 +25,7 @@ def levanta(excecao: type[BaseException], chamada) -> BaseException:
         chamada()
     except excecao as erro:
         return erro
-    # raise AssertionError(f"não levantou {excecao.__name__}")
+    raise AssertionError(f"não levantou {excecao.__name__}")
 
 
 ana = Paciente("Ana Souza", "700000000000001")
@@ -226,3 +226,4 @@ for chamada, esperado in [
               capturadas == [esperado])
 
 print("\nTodas as verificações passaram.")
+
